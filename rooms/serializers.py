@@ -32,3 +32,12 @@ class WriteRoomSerializer(serializers.Serializer):
     #반드시 instance(이 경우는 Room)를 return해야함
     def create(self, validated_data):
         return Room.objects.create(**validated_data)
+
+    # 항상 data를 return해주어야함 
+    def validate(self, data):
+        check_in = data.get("check_in")
+        check_out = data.get("check_out")
+        if check_in == check_out:
+            raise serializers.ValidationError("Not enough time between changes")
+        else:
+            return data
