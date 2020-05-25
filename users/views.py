@@ -49,6 +49,7 @@ class FavsView(APIView):
         if pk is not None:
             try:
                 room = Room.objects.get(pk=pk)
+                # 이미 room이 fav에 있다면 삭제 없다면 추가
                 if room in user.favs.all():
                     user.favs.remove(room)
                 else:
@@ -57,4 +58,3 @@ class FavsView(APIView):
             except Room.DoesNotExist:
                 pass
         return Response(status=status.HTTP_400_BAD_REQUEST)
-    

@@ -3,8 +3,7 @@ from users.serializers import RelatedUserSerializer
 from .models import Room
 
 
-#자동으로 만드는 과정
-class ReadRoomSerializer(serializers.ModelSerializer):
+class RoomSerializer(serializers.ModelSerializer):
 
     user = RelatedUserSerializer()
 
@@ -12,12 +11,6 @@ class ReadRoomSerializer(serializers.ModelSerializer):
         model = Room
         exclude = ("modified",)
         read_only_fields = ("user", "id", "created", "updated")
-
-
-class WriteRoomSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Room
-        exclude = ("user", "modified", "created")
 
     def validate(self, data):
         if self.instance:
