@@ -11,6 +11,7 @@ class ReadRoomSerializer(serializers.ModelSerializer):
     class Meta:
         model = Room
         exclude = ("modified",)
+        read_only_fields = ("user", "id", "created", "updated")
 
 
 class WriteRoomSerializer(serializers.ModelSerializer):
