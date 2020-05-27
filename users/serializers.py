@@ -4,6 +4,7 @@ from .models import User
 
 class UserSerializer(serializers.ModelSerializer):
 
+    #작성만 하고 읽을수 없게함 (write_only)
     password = serializers.CharField(write_only=True)
 
     class Meta:
