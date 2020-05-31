@@ -94,7 +94,7 @@ def login(request):
     #setting의 secret_key를 통해 토큰의 진위여부를 가림 
     if user is not None:
         encoded_jwt = jwt.encode(
-            {"id": user.pk}, settings.SECRET_KEY, algorithm="HS256"
+            {"pk": user.pk}, settings.SECRET_KEY, algorithm="HS256"
         )
         return Response(data={"token": encoded_jwt})
     else:
