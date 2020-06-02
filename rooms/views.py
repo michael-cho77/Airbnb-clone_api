@@ -23,7 +23,8 @@ class RoomsView(APIView):
         rooms = Room.objects.all()
         # request를 파싱하는것으로 paginator가 page_queryset을 찾게됨
         results = paginator.paginate_queryset(rooms, request)
-        serializer = RoomSerializer(results, many=True)
+        #request를 통해 누가 RoomsView를 보는지 식별 
+        serializer = RoomSerializer(results, many=True, context={"request": request})
         # return Response()에서 아래로 바꾸는것으로 이전 이후 페이지등도 사용가능해짐
         return paginator.get_paginated_response(serializer.data)
 
