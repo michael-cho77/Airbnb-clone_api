@@ -6,6 +6,7 @@ from rest_framework.decorators import api_view
 from rest_framework.pagination import PageNumberPagination
 from .models import Room
 from .serializers import RoomSerializer
+from .permissions import IsOwner
 
 
 class RoomViewSet(ModelViewSet):
@@ -24,9 +25,14 @@ class RoomViewSet(ModelViewSet):
         elif self.action == "create":
             permission_classes = [permissions.IsAuthenticated]
         else:
-            return Response(status=status.HTTP_404_NOT_FOUND)
             permission_classes = [IsOwner]
-
+        return [permission() for permission in permission_classes]
+        '''
+        called_perm = []
+        for p in permission_classes:
+            called_perm.append(p())
+            를 한줄로 축약한것
+        '''
 
 
 
