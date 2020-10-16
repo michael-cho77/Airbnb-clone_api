@@ -8,9 +8,7 @@ class Room(CoreModel):
     address = models.CharField(max_length=140)
     price = models.IntegerField(help_text="USD per night")
     beds = models.IntegerField(default=1)
-    # 위도
     lat = models.DecimalField(max_digits=10, decimal_places=6)
-    # 경도
     lng = models.DecimalField(max_digits=10, decimal_places=6)
     bedrooms = models.IntegerField(default=1)
     bathrooms = models.IntegerField(default=1)
@@ -31,7 +29,6 @@ class Room(CoreModel):
 
     class Meta:
         ordering = ["-pk"]
-
 
 
 class Photo(CoreModel):
